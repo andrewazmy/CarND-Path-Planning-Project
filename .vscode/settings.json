@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.ipp": "cpp",
+        "hash_map": "cpp",
+        "system_error": "cpp"
+    }
+}
