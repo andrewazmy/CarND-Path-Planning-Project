@@ -1,5 +1,10 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
+
+## Rubric points
+### Compilation
+#### The code compiles correctly.
+Code compiles without errors with cmake and make. No changes were made to CMakeLists.txt.
    
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
