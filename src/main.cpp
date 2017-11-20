@@ -257,11 +257,14 @@ int main() {
 				float d = sensor_fusion[i][6];
 				int car_lane = -1;
 				//convert d to lane
-                if ( d > 0 && d < 4 ) {
+				if (d > 0.0 && d < 4.0)
+				{
                   car_lane = 0;
-                } else if ( d > 4 && d < 8 ) {
+				}else if (d > 4.0 && d < 8.0)
+				{
                   car_lane = 1;
-                } else if ( d > 8 && d < 12 ) {
+				}else if (d > 8.0 && d < 12.0)
+				{
                   car_lane = 2;
 				}
 
@@ -269,26 +272,22 @@ int main() {
                 if (car_lane < 0) {
                   continue;
 				}
-				
+
 				double vx = sensor_fusion[i][3];
 				double vy = sensor_fusion[i][4];
 				double check_car_s = sensor_fusion[i][5];
 				double check_speed = sqrt(vx*vx + vy*vy);
-
+				double safe_dist = 30.0;				
 				check_car_s += (double)prev_size*0.02*check_speed;
-
 				if (car_lane == lane)
 				{
-					// Car in our lane.
-					car_ahead |= check_car_s > car_s && check_car_s - car_s < 30;
+					car_ahead |= ((check_car_s > car_s) && (check_car_s - car_s < safe_dist));
 				}else if (car_lane - lane == -1)
 				{
-					// Car left
-					car_left |= car_s - 30 < check_car_s && car_s + 30 > check_car_s;
+					car_left |= ((car_s - safe_dist/5 < check_car_s) && (car_s + safe_dist > check_car_s));
 				}else if (car_lane - lane == 1)
 				{
-					// Car right
-					car_right |= car_s - 30 < check_car_s && car_s + 30 > check_car_s;
+					car_right |= ((car_s - safe_dist/5 < check_car_s) && (car_s + safe_dist > check_car_s));
 				}
 				
 			}
